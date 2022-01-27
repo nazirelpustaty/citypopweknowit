@@ -4,7 +4,7 @@ import { StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 function HomeScreen(props) {
     return (
         <SafeAreaView style={styles.homeContainer}>
-            <Text style={styles.logo}>CityPop</Text>
+            <Text style={styles.header}>CityPop</Text>
             <TouchableOpacity style={styles.button} onPress={()=> console.log("Pressed")}>
                 <Text style={styles.text}>SEARCH BY CITY</Text>
             </TouchableOpacity>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center'
     },
-    logo: {
+    header: {
         position: "absolute",
         top: 150,
         fontSize: 30,
