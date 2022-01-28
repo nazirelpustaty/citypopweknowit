@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 
+import colors from '../config/colors'
+
 function HomeScreen(props) {
     return (
         <SafeAreaView style={styles.homeContainer}>
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: colors.primary,
         justifyContent: 'center'
     },
     header: {
@@ -29,12 +31,12 @@ const styles = StyleSheet.create({
         fontWeight: '500'
     },
     button: {
-        backgroundColor: 'white',
+        backgroundColor: colors.primary,
         width: 500,
         height: 50,
         paddingVertical: 8,
         paddingHorizontal: 24,
-        shadowColor: "#2a2a2a",
+        shadowColor: colors.shadowColor,
         shadowOpacity:0.15,
         shadowRadius: 4,
         shadowOffset:{
