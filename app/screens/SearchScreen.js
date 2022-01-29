@@ -1,24 +1,36 @@
 import React from 'react';
 import { ActivityIndicator,TouchableOpacity,  Image, StyleSheet, Text, TextInput} from 'react-native';
-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import colors from '../config/colors'
 
-function SearchScreen(props) {
+let searchText = '';
+const saveUserInput = userInput => {
+    searchText = userInput;
+};
+
+function onPressButtonSearch(searchType) {
+    if(searchText == '')
+    {
+        alert('You have to write something in the search bar above');
+    }
+    const searchTextEncoded = encodeURIComponent(searchText);
+};
+
+function SearchScreen({route}) {
     return (
-        
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
             enableOnAndroid={true}
             keyboardShouldPersistTaps='handled'>
 
-            <Text style={styles.header}>SEARCH BY CITY</Text>       
+            <Text style={styles.header}>SEARCH BY {route.params.title}</Text>       
             <TextInput 
                 style={styles.input}
-                placeholder="Enter a city">
+                placeholder={"Enter a " + route.params.title.toLowerCase()}
+                onChangeText={userInput => saveUserInput(userInput)} >
             </TextInput>
-            <TouchableOpacity style={styles.button} onPress={()=> console.log("Pressed")}>
+            <TouchableOpacity style={styles.button} onPress={() => onPressButtonSearch(route.params.title)}>
                 <Image 
                     source={require('../assets/search.png')}
                     style={styles.icon} />

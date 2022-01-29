@@ -1,16 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 
+
 import colors from '../config/colors'
 
-function HomeScreen(props) {
+function HomeScreen({navigation}) {
     return (
         <SafeAreaView style={styles.homeContainer}>
             <Text style={styles.header}>CityPop</Text>
-            <TouchableOpacity style={styles.button} onPress={()=> console.log("Pressed")}>
+            <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("Search", {title: "CITY"})}>
                 <Text style={styles.text}>SEARCH BY CITY</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={()=> console.log("Pressed")}>
+            <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("Search", {title: "COUNTRY"})}>
                 <Text style={styles.text}>SEARCH BY COUNTRY</Text>
             </TouchableOpacity>
         </SafeAreaView>
