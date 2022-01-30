@@ -73,6 +73,7 @@ export default class ListScreen extends React.Component{
 
 
     render() { 
+        // The GUI while the page is loading
         if(this.state.isLoading && !this.state.done)
         {
             this.fetchData();
@@ -81,6 +82,7 @@ export default class ListScreen extends React.Component{
                     <ActivityIndicator visible={true}/>
                 </SafeAreaView>
             ); 
+        // The GUI if no result was found
         } else if(this.state.done && !this.state.found)
         {
             return (
@@ -88,6 +90,7 @@ export default class ListScreen extends React.Component{
                     <Text style={styles.header}>{this.state.searchText} was not found please try again</Text>
                 </SafeAreaView>
             );
+        // The GUI to present the results
         } else if (!this.state.isLoading && this.state.done && this.state.found)
         {
             return (

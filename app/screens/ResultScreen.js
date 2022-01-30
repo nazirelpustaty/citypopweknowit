@@ -44,6 +44,7 @@ export default class ResultScreen extends React.Component{
     }
 
     render() { 
+        //The GUI while the results are loading
         if(this.state.isLoading && !this.state.done)
         {
             this.fetchData();
@@ -52,6 +53,7 @@ export default class ResultScreen extends React.Component{
                     <ActivityIndicator visible={true}/>
                 </SafeAreaView>
             ); 
+        // The GUI if no result was found or if the result is a place with population zero.
         } else if((this.state.done && !this.state.found) || this.state.population == 0 )
         {
             return (
@@ -59,6 +61,7 @@ export default class ResultScreen extends React.Component{
                     <Text style={styles.header}>{this.state.searchText} was not found please try again</Text>
                 </SafeAreaView>
             );
+        // The GUI to present the results.
         } else if (!this.state.isLoading && this.state.done && this.state.found && this.state.population > 0)
         {
             return (
