@@ -30,6 +30,8 @@ function onPressButtonSearch(navigation, searchType) {
 
 function SearchScreen({route, navigation}) {
     return (
+        // KeyboardAwareScrollView prevents the keyboard from pushing up the view, it works on ios but not on
+        // Android. Please read the Readme-file for more information regarding this issue.
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
             behavior={Platform.OS == "ios" ? "padding" : "height"} enabled={false}>

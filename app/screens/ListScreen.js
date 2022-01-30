@@ -41,7 +41,6 @@ export default class ListScreen extends React.Component{
     );
 
     fetchData() {
-        console.log(this.state.url)
         fetch(this.state.url)
             .then((response) => response.json())
             .then((json) => {
@@ -52,6 +51,7 @@ export default class ListScreen extends React.Component{
                     found: true,
                     isLoading: false,
                     done: true,
+                    // Reformat the objects to only include relevant information for us
                     cities: json.geonames.map(obj => {
                         let nObj = {}
                         nObj['id'] = obj.geonameId
