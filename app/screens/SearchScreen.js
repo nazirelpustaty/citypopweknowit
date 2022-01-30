@@ -1,23 +1,34 @@
 import React from 'react';
-import { ActivityIndicator,TouchableOpacity,  Image, StyleSheet, Text, TextInput} from 'react-native';
+import { TouchableOpacity,  Image, StyleSheet, Text, TextInput} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import colors from '../config/colors'
+import getCountryCode from '../helperFunctions/countrycodes'
 
 let searchText = '';
 const saveUserInput = userInput => {
     searchText = userInput;
 };
 
-function onPressButtonSearch(searchType) {
+function onPressButtonSearch(navigation, searchType) {
     if(searchText == '')
     {
         alert('You have to write something in the search bar above');
-    }
-    const searchTextEncoded = encodeURIComponent(searchText);
+    } else {
+        const searchTextEncoded = encodeURIComponent(searchText.toLowerCase());
+        let url;
+        if(searchType == 'CITY') {
+            url = 'http://api.geonames.org/searchJSON?q=' + searchTextEncoded + '&maxRows=1&orderby=population&featureCode=PPLA&featureCode=PPLC&username=weknowit';
+            navigation.navigate("Result", {city: searchText, url: url})
+        } else {
+            const countryCode = getCountryCode(searchText.toLowerCase());
+            url = 'http://api.geonames.org/searchJSON?q=' + searchTextEncoded + '&maxRows=5&country=' + countryCode + '&orderby=population&featureCode=PPL&featureCode=PPLA&featureCode=PPLC&username=weknowit';
+            navigation.navigate("List", {country: searchText, countryCode: countryCode, url: url})
+        } 
+    }  
 };
 
-function SearchScreen({route}) {
+function SearchScreen({route, navigation}) {
     return (
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
@@ -30,7 +41,7 @@ function SearchScreen({route}) {
                 placeholder={"Enter a " + route.params.title.toLowerCase()}
                 onChangeText={userInput => saveUserInput(userInput)} >
             </TextInput>
-            <TouchableOpacity style={styles.button} onPress={() => onPressButtonSearch(route.params.title)}>
+            <TouchableOpacity style={styles.button} onPress={() => onPressButtonSearch(navigation, route.params.title)}>
                 <Image 
                     source={require('../assets/search.png')}
                     style={styles.icon} />
