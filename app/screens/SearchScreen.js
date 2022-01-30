@@ -36,6 +36,7 @@ function SearchScreen({route, navigation}) {
             <Text style={styles.header}>SEARCH BY {route.params.title}</Text>       
             <TextInput 
                 style={styles.input}
+                defaultValue=""
                 placeholder={"Enter a " + route.params.title.toLowerCase()}
                 onChangeText={userInput => saveUserInput(userInput)} >
             </TextInput>

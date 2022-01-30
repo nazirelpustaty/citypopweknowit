@@ -41,6 +41,7 @@ export default class ListScreen extends React.Component{
     );
 
     fetchData() {
+        console.log(this.state.url)
         fetch(this.state.url)
             .then((response) => response.json())
             .then((json) => {
