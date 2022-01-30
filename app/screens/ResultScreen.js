@@ -13,13 +13,12 @@ export default class ResultScreen extends React.Component{
             searchText: this.props.route.params.city,
             found: false,
             done: false,
-            population: 0
+            population: null
         }
 
     }
 
     fetchData() {
-        console.log(this.state.url);
         fetch(this.state.url)
             .then((response) => response.json())
             .then((json) => {
@@ -53,14 +52,14 @@ export default class ResultScreen extends React.Component{
                     <ActivityIndicator visible={true}/>
                 </SafeAreaView>
             ); 
-        } else if(this.state.done && !this.state.found)
+        } else if((this.state.done && !this.state.found) || this.state.population == 0 )
         {
             return (
                 <SafeAreaView style={styles.homeContainer}>
                     <Text style={styles.header}>{this.state.searchText} was not found please try again</Text>
                 </SafeAreaView>
             );
-        } else if (!this.state.isLoading && this.state.done && this.state.found)
+        } else if (!this.state.isLoading && this.state.done && this.state.found && this.state.population > 0)
         {
             return (
                 <SafeAreaView style={styles.homeContainer}>
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.lightGrey,
         height: 200,
         width: '90%',
-        bottom: 50,
+        bottom: 10,
         alignItems: 'center',
         justifyContent: 'center'
     },

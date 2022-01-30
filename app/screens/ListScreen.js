@@ -7,10 +7,11 @@ import ActivityIndicator from '../components/ActivityIndicator';
 
 //This function handels when a city in the list is clicked
 function onPressListElement(navigation, countryCode, cityName) {
-    const cityNameEncoded = encodeURIComponent(cityName.toLowerCase());
+    const cityNameEncoded = encodeURIComponent(cityName.trim().toLowerCase());
     //The country code is to ensure that we get the city from the right country
-    const url = 'http://api.geonames.org/searchJSON?q=' + cityNameEncoded + 
-        '&maxRows=1&orderby=population&username=weknowit&country=' + countryCode;
+    const url = 'http://api.geonames.org/searchJSON?name_equals=' + cityNameEncoded + 
+        '&featureClass=P&maxRows=1&orderby=population&username=weknowit&country=' 
+        + countryCode;
     navigation.navigate("Result", {city: cityName, url: url});
 }
 
@@ -40,7 +41,6 @@ export default class ListScreen extends React.Component{
     );
 
     fetchData() {
-        console.log(this.state.url);
         fetch(this.state.url)
             .then((response) => response.json())
             .then((json) => {
@@ -89,7 +89,6 @@ export default class ListScreen extends React.Component{
             );
         } else if (!this.state.isLoading && this.state.done && this.state.found)
         {
-            console.log(this.state.cities);
             return (
                 <SafeAreaView style={styles.container}>
                     <Text style={styles.header}>{this.state.searchText}</Text>

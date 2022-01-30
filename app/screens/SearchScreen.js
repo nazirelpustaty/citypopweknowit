@@ -11,17 +11,17 @@ const saveUserInput = userInput => {
 };
 
 function onPressButtonSearch(navigation, searchType) {
-    if(searchText == '')
+    if(searchText.trim() == '')
     {
         alert('You have to write something in the search bar above');
     } else {
-        const searchTextEncoded = encodeURIComponent(searchText.toLowerCase());
+        const searchTextEncoded = encodeURIComponent(searchText.trim().toLowerCase());
         let url;
         if(searchType == 'CITY') {
-            url = 'http://api.geonames.org/searchJSON?name_equals=' + searchTextEncoded + '&maxRows=1&username=weknowit';
+            url = 'http://api.geonames.org/searchJSON?name_equals=' + searchTextEncoded + '&featureClass=P&maxRows=1&orderby=population&username=weknowit';
             navigation.navigate("Result", {city: searchText, url: url})
         } else {
-            const countryCode = getCountryCode(searchText.toLowerCase());
+            const countryCode = getCountryCode(searchText.trim().toLowerCase());
             url = 'http://api.geonames.org/searchJSON?q=' + searchTextEncoded + '&maxRows=5&country=' + countryCode + '&orderby=population&featureCode=PPL&featureCode=PPLA&featureCode=PPLC&username=weknowit';
             navigation.navigate("List", {country: searchText, countryCode: countryCode, url: url})
         } 
@@ -32,9 +32,7 @@ function SearchScreen({route, navigation}) {
     return (
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
-            enableOnAndroid={true}
-            keyboardShouldPersistTaps='handled'>
-
+            behavior={Platform.OS == "ios" ? "padding" : "height"} enabled={false}>
             <Text style={styles.header}>SEARCH BY {route.params.title}</Text>       
             <TextInput 
                 style={styles.input}
@@ -56,12 +54,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.primary,
         justifyContent: 'center',
-        zIndex: 1,
     },
     header: {
         position: "absolute",
-        top: 150,
-        fontSize: 60,
+        top: 50,
+        fontSize: 30,
         fontWeight: '500',
         textAlign: 'center'
     },
