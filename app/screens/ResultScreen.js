@@ -1,7 +1,8 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, SafeAreaView, View} from 'react-native';
+import {StyleSheet, Text, SafeAreaView, View} from 'react-native';
 
 import colors from "../config/colors"
+import ActivityIndicator from '../components/ActivityIndicator';
 
 export default class ResultScreen extends React.Component{
     constructor(props) {
@@ -49,7 +50,7 @@ export default class ResultScreen extends React.Component{
             this.fetchData();
             return (
                 <SafeAreaView style={styles.homeContainer}>
-                    <ActivityIndicator size="large"/>
+                    <ActivityIndicator visible={true}/>
                 </SafeAreaView>
             ); 
         } else if(this.state.done && !this.state.found)

@@ -1,14 +1,16 @@
 import React from 'react';
-import {ActivityIndicator, FlatList, SafeAreaView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import colors from '../config/colors'
+import ActivityIndicator from '../components/ActivityIndicator';
 
 
-
+//This function handels when a city in the list is clicked
 function onPressListElement(navigation, countryCode, cityName) {
     const cityNameEncoded = encodeURIComponent(cityName.toLowerCase());
+    //The country code is to ensure that we get the city from the right country
     const url = 'http://api.geonames.org/searchJSON?q=' + cityNameEncoded + 
-        '&maxRows=1&orderby=population&featureCode=PPLA&featureCode=PPLC&username=weknowit&country=' + countryCode;
+        '&maxRows=1&orderby=population&username=weknowit&country=' + countryCode;
     navigation.navigate("Result", {city: cityName, url: url});
 }
 
@@ -26,6 +28,7 @@ export default class ListScreen extends React.Component{
 
     }
 
+    //An element in the list
     City = ({ name}) => (
         <TouchableHighlight
             onPress={()=> onPressListElement(this.props.navigation, this.props.route.params.countryCode, name)}
@@ -41,9 +44,7 @@ export default class ListScreen extends React.Component{
         fetch(this.state.url)
             .then((response) => response.json())
             .then((json) => {
-            
 
-            console.log(json.geonames);
 
             if(json.geonames.length >= 1) {
                 this.setState({
@@ -57,7 +58,6 @@ export default class ListScreen extends React.Component{
                         return nObj
                     })
                 })
-                console.log(this.state.cities);
             } else {
                 this.setState({
                     isLoading: false,
@@ -66,7 +66,7 @@ export default class ListScreen extends React.Component{
             }
         })
         .catch((error) => {
-        console.error(error);
+            console.error(error);
         });
     }
 
@@ -77,7 +77,7 @@ export default class ListScreen extends React.Component{
             this.fetchData();
             return (
                 <SafeAreaView style={styles.container}>
-                    <ActivityIndicator size="large"/>
+                    <ActivityIndicator visible={true}/>
                 </SafeAreaView>
             ); 
         } else if(this.state.done && !this.state.found)

@@ -18,7 +18,7 @@ function onPressButtonSearch(navigation, searchType) {
         const searchTextEncoded = encodeURIComponent(searchText.toLowerCase());
         let url;
         if(searchType == 'CITY') {
-            url = 'http://api.geonames.org/searchJSON?q=' + searchTextEncoded + '&maxRows=1&orderby=population&featureCode=PPLA&featureCode=PPLC&username=weknowit';
+            url = 'http://api.geonames.org/searchJSON?name_equals=' + searchTextEncoded + '&maxRows=1&username=weknowit';
             navigation.navigate("Result", {city: searchText, url: url})
         } else {
             const countryCode = getCountryCode(searchText.toLowerCase());
