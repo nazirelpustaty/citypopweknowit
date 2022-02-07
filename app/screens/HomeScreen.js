@@ -4,8 +4,10 @@ import { StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 
 import colors from '../config/colors'
 
+// This function returns the first screen that the user sees when the app is opened.
 function HomeScreen({navigation}) {
     return (
+        // SafeAreaView is used to ensure that the front camera in the newer iPhones does not cover anything
         <SafeAreaView style={styles.homeContainer}>
             <Text style={styles.header}>CityPop</Text>
             <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("Search", {title: "CITY"})}>

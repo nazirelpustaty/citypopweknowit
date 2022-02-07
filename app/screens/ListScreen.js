@@ -15,14 +15,18 @@ function onPressListElement(navigation, countryCode, cityName) {
     navigation.navigate("Result", {city: cityName, url: url});
 }
 
+
+/*
+    This class represents the results of when the user has searched for a country
+ */
 export default class ListScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true,
+            isLoading: true, // This is used to show the user that the screen is loading
             url: this.props.route.params.url,
             searchText: this.props.route.params.country,
-            found: false,
+            found: false, // This variable is used to show different views depending on if the country was found or not
             done: false,
             cities: []
         }
@@ -41,12 +45,11 @@ export default class ListScreen extends React.Component{
     );
 
     fetchData() {
-        console.log(this.state.url)
         fetch(this.state.url)
             .then((response) => response.json())
             .then((json) => {
 
-
+            // If some cities was found
             if(json.geonames.length >= 1) {
                 this.setState({
                     found: true,
@@ -72,7 +75,8 @@ export default class ListScreen extends React.Component{
     }
 
 
-    render() { 
+    render() {
+        // The view when the data is loading§
         if(this.state.isLoading && !this.state.done)
         {
             this.fetchData();
@@ -81,6 +85,7 @@ export default class ListScreen extends React.Component{
                     <ActivityIndicator visible={true}/>
                 </SafeAreaView>
             ); 
+          // The view when the search is done but no cities where found
         } else if(this.state.done && !this.state.found)
         {
             return (
@@ -88,6 +93,7 @@ export default class ListScreen extends React.Component{
                     <Text style={styles.header}>{this.state.searchText} was not found please try again</Text>
                 </SafeAreaView>
             );
+          // The view for when the search is done and data was found
         } else if (!this.state.isLoading && this.state.done && this.state.found)
         {
             return (

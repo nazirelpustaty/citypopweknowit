@@ -4,6 +4,10 @@ import {StyleSheet, Text, SafeAreaView, View} from 'react-native';
 import colors from "../config/colors"
 import ActivityIndicator from '../components/ActivityIndicator';
 
+/*
+    This class is used to represent the screen that is shown when the user has searched for a city
+    or clicked on a city from the list that is shown after the user has search for a country.
+ */
 export default class ResultScreen extends React.Component{
     constructor(props) {
         super(props);
@@ -23,7 +27,7 @@ export default class ResultScreen extends React.Component{
             .then((response) => response.json())
             .then((json) => {
             
-
+            // If the city was found
             if(json.geonames.length >= 1) {
                 this.setState({
                     found: true,
@@ -44,6 +48,7 @@ export default class ResultScreen extends React.Component{
     }
 
     render() { 
+        // The view that is shown when the data is loading
         if(this.state.isLoading && !this.state.done)
         {
             this.fetchData();
@@ -51,7 +56,10 @@ export default class ResultScreen extends React.Component{
                 <SafeAreaView style={styles.homeContainer}>
                     <ActivityIndicator visible={true}/>
                 </SafeAreaView>
-            ); 
+            );
+          // The view that is shown when the search is done but no data is found or
+          // when the population is zero which can sometimes be a returned data that
+          // is irrelevant for us. E.g. an unpopulated place.
         } else if((this.state.done && !this.state.found) || this.state.population == 0 )
         {
             return (
@@ -59,6 +67,7 @@ export default class ResultScreen extends React.Component{
                     <Text style={styles.header}>{this.state.searchText} was not found please try again</Text>
                 </SafeAreaView>
             );
+          // The view that is show when the search is done and we got data of a city with population over zero
         } else if (!this.state.isLoading && this.state.done && this.state.found && this.state.population > 0)
         {
             return (
