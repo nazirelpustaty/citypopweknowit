@@ -1,19 +1,19 @@
 # CityPop
 
-CityPop is an Android and Ios application that was built with React-Native and the tool Expo. The user can through the app search for a country and get a list of its five most populated cities sorted after population. The user can even choose to search for a specific city and get its population. The application's code is intended to be a work sample for my job application at WeKnowIt.
+CityPop is an Android and ios application that was built with React-Native and the tool Expo. The user can through the app search for a country and get a list of its five most populated cities sorted after population. The user can even choose to search for a specific city and get its population. The application's code is intended to act as a work sample for my job application at WeKnowIt.
 
 ## Installation
 
 Run the following commands on your terminal
 
 ```bash
-git clone https://gitlab.liu.se/nazel607/citypop.git
-cd citypop
+git clone https://github.com/nazirelpustaty/citypopweknowit.git
+cd citypopweknowit
 npm install
 npm start
 ```
 
-Then download the Expo app on your Ios or Android device and scan the QR code that is provided in the terminal (For Android you can do it directly from the app whereas on iPhone you should use your camera app). Make sure that both your computer and your device are connected to the same Wifi.
+Then download the Expo app on your ios or Android device and scan the QR code that is provided in the terminal (For Android you can do it directly from the app whereas on iPhone you should use your camera app). Make sure that both your computer and your device are connected to the same Wifi.
 
 ## Usage
 
