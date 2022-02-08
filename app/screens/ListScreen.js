@@ -26,7 +26,7 @@ export default class ListScreen extends React.Component{
             isLoading: true, // This is used to show the user that the screen is loading
             url: this.props.route.params.url,
             searchText: this.props.route.params.country,
-            found: false, // This variable is used to show different views depending on if the country was found or not
+            found: false, // This variable is used to show different views depending on whether the country was found or not
             done: false,
             cities: []
         }
@@ -77,7 +77,7 @@ export default class ListScreen extends React.Component{
 
 
     render() {
-        // The view when the data is loading§
+        // The view when the data is loading
         if(this.state.isLoading && !this.state.done)
         {
             this.fetchData();

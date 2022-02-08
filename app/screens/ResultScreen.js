@@ -67,7 +67,7 @@ export default class ResultScreen extends React.Component{
                     <Text style={styles.header}>{this.state.searchText} was not found please try again</Text>
                 </SafeAreaView>
             );
-          // The view that is show when the search is done and we got data of a city with population over zero
+          // The view that is shown when the search is done and we got data of a city with population over zero
         } else if (!this.state.isLoading && this.state.done && this.state.found && this.state.population > 0)
         {
             return (

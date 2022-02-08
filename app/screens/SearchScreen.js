@@ -49,7 +49,7 @@ function onPressButtonSearch(navigation, searchType) {
 };
 
 /*
-    This function returns that screen that appears after the HomeScreen. Depending on the user's choice
+    This function returns the screen that appears after the HomeScreen. Depending on the user's choice
     there, the screen is modified i.e. if it is a country or a city the user is searching for.
  */
 function SearchScreen({route, navigation}) {

@@ -9,6 +9,9 @@ import SearchScreen from './app/screens/SearchScreen';
 
 const Stack = createNativeStackNavigator();
 
+/*
+  The stack navigator handles the navigation in our app.
+ */
 const StackNavigator = () => (
   <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'CityPop' }}/>
